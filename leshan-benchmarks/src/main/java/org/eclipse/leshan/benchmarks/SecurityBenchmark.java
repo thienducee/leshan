@@ -38,7 +38,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Handler;
 import java.util.logging.LogManager;
@@ -114,12 +113,14 @@ public class SecurityBenchmark {
             server.getRegistrationService().addListener(new RegistrationListener() {
 
                 @Override
-                public void updated(RegistrationUpdate update, Registration updatedRegistration) {
+                public void updated(RegistrationUpdate update, Registration updatedRegistration,
+                        Registration previousRegistration) {
                     nbUpdate.incrementAndGet();
                 }
 
                 @Override
-                public void unregistered(Registration registration, Collection<Observation> observations) {
+                public void unregistered(Registration registration, Collection<Observation> observations,
+                        boolean expired) {
                     nbDereg.incrementAndGet();
 
                 }
@@ -135,6 +136,11 @@ public class SecurityBenchmark {
 
         @TearDown(Level.Trial)
         public void doTearDown() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("********************************************");
             System.out.println("nb update :" + nbUpdate);
             System.out.println("nb reg :" + nbReg);
@@ -189,14 +195,21 @@ public class SecurityBenchmark {
                 @Override
                 public void onDeregistrationFailure(DmServerInfo server, ResponseCode responseCode,
                         String errorMessage) {
+                    System.out.println("failure");
+                    countDownLatch.countDown();
+                }
+
+                @Override
+                public void onDeregistrationTimeout(DmServerInfo server) {
+                    System.out.println("timeout regeng");
                     countDownLatch.countDown();
                 }
             });
             client.destroy(true);
             try {
-                countDownLatch.await(1000, TimeUnit.MILLISECONDS);
+                countDownLatch.await();
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
+                System.out.println("timeout latch");
                 e.printStackTrace();
             }
         }
@@ -224,9 +237,9 @@ public class SecurityBenchmark {
         });
         cs.client.start();
         try {
-            countDownLatch.await(1000, TimeUnit.MILLISECONDS);
+            countDownLatch.await();
         } catch (InterruptedException e) {
-
+            e.printStackTrace();
         }
     }
 }

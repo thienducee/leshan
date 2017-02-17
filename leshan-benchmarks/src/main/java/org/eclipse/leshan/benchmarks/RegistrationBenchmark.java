@@ -37,10 +37,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Handler;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.eclipse.leshan.LwM2mId;
@@ -75,19 +73,43 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
-import org.slf4j.LoggerFactory;
 
 public class RegistrationBenchmark {
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(RegistrationBenchmark.class);
+    // private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(RegistrationBenchmark.class);
 
     static {
-        LogManager.getLogManager().reset();
-        Logger globalLogger = Logger.getGlobal();
+        // LogManager.getLogManager().reset();
+        Logger globalLogger = Logger.getLogger("");
         globalLogger.setLevel(java.util.logging.Level.OFF);
-        Handler[] handlers = globalLogger.getHandlers();
-        for (Handler handler : handlers) {
-            globalLogger.removeHandler(handler);
+        for (Handler handler : globalLogger.getHandlers()) {
+            handler.setLevel(java.util.logging.Level.OFF);
         }
+        //
+        // Logger cflog = Logger.getLogger("org.eclipse.californium");
+        // cflog.setLevel(java.util.logging.Level.WARNING);
+        // cflog.setUseParentHandlers(true);
+        // for (Handler handler : cflog.getHandlers()) {
+        // handler.setLevel(java.util.logging.Level.ALL);
+        // }
+        // Logger logger = Logger.getLogger(org.eclipse.californium.core.network.Matcher.class.getCanonicalName());
+        // logger.setLevel(java.util.logging.Level.ALL);
+        // logger.setFilter(new Filter() {
+        // @Override
+        // public boolean isLoggable(LogRecord record) {
+        // return record.getMessage().startsWith("Tracking");
+        // }
+        // });
+        // try {
+        // logger.addHandler(new FileHandler("log.log"));
+        // } catch (SecurityException e) {
+        // e.printStackTrace();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // for (Handler handler : logger.getHandlers()) {
+        // handler.setLevel(java.util.logging.Level.ALL);
+        // }
+
     }
 
     private static int NON_SECURE_PORT = 9999;
@@ -112,14 +134,15 @@ public class RegistrationBenchmark {
             server.getRegistrationService().addListener(new RegistrationListener() {
 
                 @Override
-                public void updated(RegistrationUpdate update, Registration updatedRegistration) {
+                public void updated(RegistrationUpdate update, Registration updatedRegistration,
+                        Registration previousRegistration) {
                     nbUpdate.incrementAndGet();
                 }
 
                 @Override
-                public void unregistered(Registration registration, Collection<Observation> observations) {
+                public void unregistered(Registration registration, Collection<Observation> observations,
+                        boolean expired) {
                     nbDereg.incrementAndGet();
-
                 }
 
                 @Override
@@ -133,17 +156,17 @@ public class RegistrationBenchmark {
 
         @TearDown(Level.Trial)
         public void doTearDown() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("********************************************");
             System.out.println("nb update :" + nbUpdate);
             System.out.println("nb reg :" + nbReg);
             System.out.println("nb dereg : " + nbDereg);
             System.out.println("nb start : " + nbStart);
             System.out.println("********************************************");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             server.destroy();
         }
     }
@@ -196,16 +219,23 @@ public class RegistrationBenchmark {
                 @Override
                 public void onDeregistrationFailure(DmServerInfo server, ResponseCode responseCode,
                         String errorMessage) {
+                    System.out.println("failure");
+                    countDownLatch.countDown();
+                }
+
+                @Override
+                public void onDeregistrationTimeout(DmServerInfo server) {
+                    System.out.println("timeout regeng");
                     countDownLatch.countDown();
                 }
             });
             client.destroy(true);
             try {
-                countDownLatch.await(1000, TimeUnit.MILLISECONDS);
+                countDownLatch.await();
             } catch (InterruptedException e) {
+                System.out.println("timeout latch");
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -233,7 +263,7 @@ public class RegistrationBenchmark {
         });
         cs.client.start();
         try {
-            countDownLatch.await(1000, TimeUnit.MILLISECONDS);
+            countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
