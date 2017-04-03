@@ -39,7 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A Lightweight M2M server, serving bootstrap information on /bs.
+ * A Lightweight M2M server, serving bootstrap information on /bs and optionally enrolling on /est.
  */
 public class LeshanBootstrapServer implements LwM2mBootstrapServer {
 
@@ -63,7 +63,14 @@ public class LeshanBootstrapServer implements LwM2mBootstrapServer {
     public LeshanBootstrapServer(InetSocketAddress localAddress, InetSocketAddress localAddressSecure,
             BootstrapStore bsStore, BootstrapSecurityStore bsSecurityStore, BootstrapSessionManager bsSessionManager,
             LwM2mModel model, NetworkConfig networkConfig) {
+        this(localAddress, localAddressSecure, bsStore, bsSecurityStore, bsSessionManager, model, networkConfig, null);
+    }
+
+    public LeshanBootstrapServer(InetSocketAddress localAddress, InetSocketAddress localAddressSecure,
+            BootstrapStore bsStore, BootstrapSecurityStore bsSecurityStore, BootstrapSessionManager bsSessionManager,
+            LwM2mModel model, NetworkConfig networkConfig, PkiService pki) {
         Validate.notNull(bsStore, "bootstrap store must not be null");
+        Validate.notNull(bsSecurityStore, "bootstrap security store must not be null");
         Validate.notNull(networkConfig, "networkConfig must not be null");
 
         this.bsStore = bsStore;
@@ -95,6 +102,11 @@ public class LeshanBootstrapServer implements LwM2mBootstrapServer {
         BootstrapResource bsResource = new BootstrapResource(
                 new BootstrapHandler(bsStore, requestSender, bsSessionManager));
         coapServer.add(bsResource);
+
+        // if PkiService is provided install the EST resource
+        if (pki != null) {
+            coapServer.add(new EstResource(bsSecurityStore, pki));
+        }
     }
 
     @Override
