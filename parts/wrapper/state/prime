@@ -1,0 +1,7 @@
+!PrimeState
+dependency_paths: !!set {}
+directories: !!set {bin: null}
+files: !!set {bin/wrapper: null}
+project_options: {}
+properties:
+  prime: ['*']

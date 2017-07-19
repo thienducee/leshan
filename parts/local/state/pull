@@ -1,0 +1,56 @@
+!PullState
+assets:
+  build-packages: []
+  source-details: null
+  stage-packages: [ca-certificates-java=20160321, 'libxdmcp6=1:1.1.2-1.1', init-system-helpers=1.29ubuntu4,
+    'default-jre-headless=2:1.8-56ubuntu2', 'default-jdk=2:1.8-56ubuntu2', libkrb5-3=1.13.2+dfsg-5ubuntu2,
+    'default-jre=2:1.8-56ubuntu2', libgssapi-krb5-2=1.13.2+dfsg-5ubuntu2, libpangoft2-1.0-0=1.38.1-1,
+    libcups2=2.1.3-4, libdbus-1-3=1.10.6-1ubuntu3.3, libfdisk1=2.27.1-6ubuntu3.3,
+    libdrm-nouveau2=2.4.70-1~ubuntu16.04.1, libpcsclite1=1.8.14-1ubuntu1.16.04.1,
+    'libnss3-nssdb=2:3.28.4-0ubuntu0.16.04.2', openjdk-8-jdk=8u131-b11-0ubuntu1.16.04.2,
+    openjdk-8-jre=8u131-b11-0ubuntu1.16.04.2, openssl=1.0.2g-1ubuntu4.8, libgdk-pixbuf2.0-0=2.32.2-1ubuntu1.2,
+    liblcms2-2=2.6-3ubuntu2, libpciaccess0=0.13.4-1, libxcb-present0=1.11.1-1ubuntu1,
+    libglapi-mesa=12.0.6-0ubuntu0.16.04.1, libpixman-1-0=0.33.6-1, libasound2-data=1.1.0-0ubuntu1,
+    libsqlite3-0=3.11.0-1ubuntu1, 'libxrender1=1:0.9.9-0ubuntu1', libicu55=55.1-7ubuntu0.2,
+    libelf1=0.165-3ubuntu1, libogg0=1.3.2-1, libbsd0=0.8.2-1, libwrap0=7.6.q-25, libavahi-common-data=0.6.32~rc+dfsg-1ubuntu2,
+    'libgmp10=2:6.1.0+dfsg-2', libavahi-common3=0.6.32~rc+dfsg-1ubuntu2, libgtk2.0-0=2.24.30-1ubuntu1.16.04.1,
+    'libxcursor1=1:1.1.14-1', libthai-data=0.1.24-2, libk5crypto3=1.13.2+dfsg-5ubuntu2,
+    libxcb-shm0=1.11.1-1ubuntu1, libxcb-render0=1.11.1-1ubuntu1, gcc-6-base=6.0.1-0ubuntu1,
+    fontconfig-config=2.11.94-0ubuntu1.1, 'libx11-6=2:1.6.3-1ubuntu2', libexpat1=2.1.0-7ubuntu0.16.04.2,
+    libxshmfence1=1.2-1, 'libllvm3.8=1:3.8-2ubuntu4', openjdk-8-jdk-headless=8u131-b11-0ubuntu1.16.04.2,
+    libdrm-amdgpu1=2.4.70-1~ubuntu16.04.1, fontconfig=2.11.94-0ubuntu1.1, libtiff5=4.0.6-1ubuntu0.2,
+    'libxau6=1:1.0.8-1', libatk1.0-0=2.18.0-1, 'libxcomposite1=1:0.4.4-1', libpangocairo-1.0-0=1.38.1-1,
+    'libpulse0=1:8.0-0ubuntu3.3', libxcb1=1.11.1-1ubuntu1, 'libxtst6=2:1.2.2-1', 'libxi6=2:1.7.6-1',
+    libkrb5support0=1.13.2+dfsg-5ubuntu2, libvorbisenc2=1.3.5-3, libgif7=5.1.4-0.3~16.04,
+    'libxinerama1=2:1.1.3-1', fonts-dejavu-core=2.35-1, ucf=3.0036, libkeyutils1=1.5.9-8ubuntu1,
+    'libxrandr2=2:1.5.0-1', libsndfile1=1.0.25-10ubuntu0.16.04.1, libjpeg8=8c-2ubuntu8,
+    libdrm2=2.4.70-1~ubuntu16.04.1, shared-mime-info=1.5-2ubuntu0.1, 'libxfixes3=1:5.0.1-2',
+    libthai0=0.1.24-2, libhogweed4=3.2-1ubuntu0.16.04.1, libfontconfig1=2.11.94-0ubuntu1.1,
+    libasyncns0=0.8-5build1, 'libx11-data=2:1.6.3-1ubuntu2', libgl1-mesa-dri=12.0.6-0ubuntu0.16.04.1,
+    libgdk-pixbuf2.0-common=2.32.2-1ubuntu1.2, libgtk2.0-common=2.24.30-1ubuntu1.16.04.1,
+    libasound2=1.1.0-0ubuntu1, 'default-jdk-headless=2:1.8-56ubuntu2', libgraphite2-3=1.3.6-1ubuntu1,
+    'libxxf86vm1=1:1.1.4-1', libjpeg-turbo8=1.4.2-0ubuntu3, libnettle6=3.2-1ubuntu0.16.04.1,
+    'libxdamage1=1:1.1.4-2', openjdk-8-jre-headless=8u131-b11-0ubuntu1.16.04.2, libgl1-mesa-glx=12.0.6-0ubuntu0.16.04.1,
+    libjbig0=2.1-3.1, libxml2=2.9.3+dfsg1-1ubuntu0.2, libflac8=1.3.1-4, libidn11=1.32-3ubuntu1.1,
+    libgnutls30=3.4.10-4ubuntu1.3, 'libnss3=2:3.28.4-0ubuntu0.16.04.2', libedit2=3.1-20150325-1ubuntu2,
+    libdrm-intel1=2.4.70-1~ubuntu16.04.1, libfreetype6=2.6.1-0.1ubuntu2.3, ca-certificates=20160104ubuntu1,
+    libffi6=3.2.1-4, libp11-kit0=0.23.2-5~ubuntu16.04.1, 'x11-common=1:7.7+13ubuntu3',
+    libdrm-radeon1=2.4.70-1~ubuntu16.04.1, libvorbis0a=1.3.5-3, libatk1.0-data=2.18.0-1,
+    libharfbuzz0b=1.0.1-1ubuntu0.1, libtasn1-6=4.7-3ubuntu0.16.04.2, libjson-c2=0.11-4ubuntu2,
+    libcairo2=1.14.6-1, libavahi-client3=0.6.32~rc+dfsg-1ubuntu2, libxcb-glx0=1.11.1-1ubuntu1,
+    libpango-1.0-0=1.38.1-1, libxcb-dri2-0=1.11.1-1ubuntu1, libxcb-dri3-0=1.11.1-1ubuntu1,
+    java-common=0.56ubuntu2, libpng12-0=1.2.54-1ubuntu1, libglib2.0-0=2.48.2-0ubuntu1,
+    'libnspr4=2:4.13.1-0ubuntu0.16.04.1', 'libx11-xcb1=2:1.6.3-1ubuntu2', libxcb-sync1=1.11.1-1ubuntu1,
+    libssl1.0.0=1.0.2g-1ubuntu4.8, 'libxext6=2:1.3.3-1', libdatrie1=0.2.10-2]
+project_options: {deb_arch: amd64}
+properties:
+  plugin: maven
+  source: leshan-server-demo
+  source-branch: ''
+  source-commit: ''
+  source-depth: 0
+  source-subdir: ''
+  source-tag: ''
+  source-type: ''
+  stage-packages: []
+schema_properties: []

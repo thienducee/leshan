@@ -1,0 +1,17 @@
+!PullState
+assets:
+  build-packages: []
+  source-details: null
+  stage-packages: []
+project_options: {deb_arch: amd64}
+properties:
+  plugin: make
+  source: .
+  source-branch: ''
+  source-commit: ''
+  source-depth: 0
+  source-subdir: ''
+  source-tag: ''
+  source-type: ''
+  stage-packages: []
+schema_properties: []

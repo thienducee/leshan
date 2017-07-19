@@ -1,0 +1,12 @@
+apps:
+  leshan-server:
+    command: command-leshan-server.wrapper
+architectures:
+- amd64
+confinement: strict
+description: Leshan provides libraries which help people to develop their own Lightweight
+  M2M server.
+grade: devel
+name: leshan-server
+summary: Leshan is an OMA Lightweight M2M server and client Java implementation.
+version: 0

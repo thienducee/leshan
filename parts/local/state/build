@@ -1,0 +1,11 @@
+!BuildState
+project_options: {deb_arch: amd64}
+properties:
+  after: []
+  build-attributes: []
+  build-packages: []
+  disable-parallel: false
+  maven-options: null
+  maven-targets: null
+  organize: {}
+schema_properties: [maven-options, maven-targets]

@@ -1,0 +1,13 @@
+!BuildState
+project_options: {deb_arch: amd64}
+properties:
+  after: []
+  artifacts: null
+  build-attributes: []
+  build-packages: []
+  disable-parallel: false
+  make-install-var: null
+  make-parameters: null
+  makefile: null
+  organize: {}
+schema_properties: [makefile, make-parameters, make-install-var, artifacts]
